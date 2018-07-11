@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload=function(){
+            x=0;
+            change();
+            // sm=document.getElementById("smile"); 在这里定义的sm不能运用到另外的函数中，如果是sm点击事件应该可以
+
+        }
+        function change(){
+            x=x+1
+           
+            y=x*-480;
+            
+            
+            var sm=document.getElementById("smile");
+            sm.style.backgroundPositionY=y+"px";//好像class不能用style
+            stop=setTimeout("change()",100);
+            if(x==14)
+            {
+                change1();
+                clearTimeout(stop);//在运用下一个循环时先停止上一个循环
+            }
+           
+            
+        }
+        function change1(){
+            x=x-1;
+            
+            y=x*-480;
+            var sm=document.getElementById("smile");
+            sm.style.backgroundPositionY=y+"px";
+            stop1=setTimeout("change1()",100);
+            if(x==0)
+            {
+                change();
+                clearTimeout(stop1);
+            }
+        }
+    </script>
+    <style>
+    #smile{
+        width: 480px;
+        height: 470px;
+        background-color: black;
+        background: url("images/erik_ce204002.jpg") no-repeat;
+        background-position: 0px -0px;  /*sprite的位置，图片往上拖动是负，往右拉动是正数*/
+        
+        margin: 0 auto;
+
+        
+
+    }
+    </style>
+</head>
+<body>
+    <div id="smile"></div>
+</body>
+</html>
