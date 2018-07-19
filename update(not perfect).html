@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        //     }
+
+        function a() {
+
+            var year = document.getElementById('year-select').getElementsByTagName('option');
+            var month = document.getElementById("month-select").getElementsByTagName("option");
+            var day = document.getElementById("day-select").getElementsByTagName("option");
+            var hour = document.getElementById("hour-select").getElementsByTagName("option");
+            var minite = document.getElementById("minite-select").getElementsByTagName("option");
+            var second = document.getElementById("second-select").getElementsByTagName("option");
+            var p = document.getElementById("result-wrapper");
+            date = new Date();
+            arr = [0, 0, 0, 0];
+            var yselect = document.getElementById("year-select");
+            var mselect = document.getElementById("month-select");
+            var dselect = document.getElementById("day-select");
+            yselect.onchange = countY;
+            mselect.onchange = countM;
+            dselect.onchange = countD;
+
+            function countY() {
+                var x = 0;
+
+                var yindex = this.selectedIndex;
+                var yvalue = this.options[yindex].value;
+
+
+                for (var i = Number(yvalue) + 1; i < date.getFullYear(); i++) {
+                    if (i % 4 == 0) {
+                        x = x + 366;
+
+                    } else {
+                        x = x + 365;
+
+                    }
+                }
+                arr[0] = x;
+                alert(arr[0] + arr[1]);
+
+
+
+            }
+
+            function countM() {
+                var x = 0;
+                var mindex = this.selectedIndex;
+                var mvalue = this.options[mindex].value;
+                if (date.getFullYear() % 4 == 0) {
+                    var arrm = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+                } else {
+                    var arrm = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+                }
+                if (mvalue % 4 == 0) {
+                    var arrm1 = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+                } else {
+                    var arrm1 = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+                }
+
+                var yselect = document.getElementById("year-select");
+                var yindex = yselect.selectedIndex;
+                var yvalue = yselect.options[yindex].value;
+                if (yvalue == date.getFullYear()) {
+                    for (var i = Number(mvalue) + 1; i < date.getMonth() + 1; i++) {
+                        x = x + arrm[i];
+                    }
+                } else {
+                    for (var i = 0; i < date.getMonth() + 1; i++) {
+                        x = x + arrm[i];
+
+                    }
+                    for (var i = Number(mvalue) + 1; i < 13; i++) {
+                        x = x + arrm1[i];
+
+                    }
+
+                }
+                //修改当月的天数；
+
+
+
+
+                arr[1] = x;
+                alert(arr[1] + arr[0]);
+
+
+
+            }
+
+            function countD() {
+                var x = 0;
+                var dindex = this.selectedIndex;
+                var dvalue = this.options[dindex].value;
+                for (var i = 0; i < dat.getDate(); i++) //不算当天
+                {
+                    x = x + 1;
+                }
+                //计算当年的当月当天到月底的天数
+
+
+
+            }
+
+        }
+        window.onload = a;
+    </script>
+
+</head>
+
+<body>
+    <select id="year-select">
+                <option value="0">0</option>
+                <option value="2000">2000</option>
+                <option value="2001">2001</option>
+                <option value="2002">2002</option>
+                ……
+                <option value="2018">2018</option>
+            </select>
+
+    <select id="month-select">
+            <option value="0">0</option>
+
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+
+    <select id="day-select">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                ……
+                <option value="31">31</option>
+            </select>
+
+    <select id="hour-select">
+                <option value="0">00</option>
+                <option value="1">01</option>        
+                ……
+                <option value="23">23</option>
+            </select>
+
+    <select id="minite-select">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                ……
+                <option>59</option>
+            </select>
+
+    <select id="second-select">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                ……
+                <option>59</option>
+            </select>
+
+    <p id="result-wrapper">现在距离 2001年1月1日星期X HH:MM:SS 还有 X 天 X 小时 X 分 X 秒</p>
+
+</body>
+
+</html>
